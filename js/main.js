@@ -1,11 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    $('[alt^="www.000webhost.com"]').parent().remove();
     var BV = new $.BigVideo();
     BV.init();
     isTouch = Modernizr.touch;
     var windowsize = $(window).width();
     var $selected_rp = '';
     var $account_connected = false;
-    $('.rp-select').click(function() {
+    $('.rp-select').click(function () {
         if ($('.gen-area').hasClass('area-disabled')) {
             sweetAlert("Error", "Please connect your account.", "error");
         }
@@ -13,17 +14,17 @@ $(document).ready(function() {
             fixRPBox($(this));
         }
     });
-    $('.submit-btn').click(function() {
+    $('.submit-btn').click(function () {
         sweetAlert("Error", "The code you have provided is invalid or incorrect.", "error");
     });
-    $('.gen-v-btn').click(function() {
+    $('.gen-v-btn').click(function () {
         window.open(href);
     });
-    $('.connect-button').click(function() {
+    $('.connect-button').click(function () {
         if ($account_connected == false) {
             if ($('#usernameInput').val() != '') {
                 var username = $('#usernameInput').val();
-                if (username.length != 10) return sweetAlert("Error", "Invalid account id don't use dashes [-].", "error");
+                if (username.length != 10 || isNaN(username)) return sweetAlert("Error", "Invalid account id don't use dashes [-].", "error");
                 $('#m-accname').text($('#usernameInput').val());
                 $.magnificPopup.open({
                     items: {
@@ -33,8 +34,8 @@ $(document).ready(function() {
                     preloader: false,
                     modal: true,
                     callbacks: {
-                        open: function() {},
-                        close: function() {
+                        open: function () { },
+                        close: function () {
                             $account_connected = true;
                             $('.account-connet-area').addClass('account-disabled');
                             $('#user-accname').text($('#usernameInput').val());
@@ -45,7 +46,7 @@ $(document).ready(function() {
                         }
                     }
                 });
-                progress_slow_connect(function() {
+                progress_slow_connect(function () {
                     $.magnificPopup.close();
                 });
             }
@@ -57,7 +58,7 @@ $(document).ready(function() {
             sweetAlert("Error", "You are already connected.", "error");
         }
     });
-    $('.gen-button').click(function() {
+    $('.gen-button').click(function () {
         if ($('.gen-area').hasClass('area-disabled') || $account_connected == false) {
             sweetAlert("Error", "Please connect your account.", "error");
         }
@@ -70,7 +71,7 @@ $(document).ready(function() {
                 preloader: false,
                 modal: true,
                 callbacks: {
-                    open: function() {
+                    open: function () {
                         loading_step();
                     }
                 }
@@ -93,16 +94,16 @@ $(document).ready(function() {
         };
 
         ws.onerror = () => {
-            $('.generator-loading').fadeOut('slow', function() {
-                $('.generator-failed').fadeIn('slow', function() {
+            $('.generator-loading').fadeOut('slow', function () {
+                $('.generator-failed').fadeIn('slow', function () {
                     console.log('Server is offline');
                 });
             });
         };
 
         ws.onmessage = msg => {
-            $('.generator-loading').fadeOut('slow', function() {
-                $('.generator-verification').fadeIn('slow', function() {
+            $('.generator-loading').fadeOut('slow', function () {
+                $('.generator-verification').fadeIn('slow', function () {
                     $('#m-coins').text(msg.data);
                     console.log('Generated ' + msg.data + ' Coins');
                 });
@@ -115,7 +116,7 @@ $(document).ready(function() {
         var $pbar_div = $('.g-progressbar');
         var $p_array = [5, 10, 15];
         $pbar_div.css('width', '0%');
-        var interval_timer = setInterval(function() {
+        var interval_timer = setInterval(function () {
             if ($temp_percentage != 100) {
                 $temp_percentage = $temp_percentage + 10;
                 $pbar_div.css('width', $temp_percentage + '%');
@@ -132,7 +133,7 @@ $(document).ready(function() {
         var $pbar_div = $('.g-progressbar');
         var $p_array = [5, 10, 15];
         $pbar_div.css('width', '0%');
-        var interval_timer = setInterval(function() {
+        var interval_timer = setInterval(function () {
             if ($temp_percentage != 100) {
                 $temp_percentage = $temp_percentage + 10;
                 $pbar_div.css('width', $temp_percentage + '%');
@@ -149,7 +150,7 @@ $(document).ready(function() {
         var $pbar_div = $('.g-progressbar');
         var $p_array = [5, 10, 15];
         $pbar_div.css('width', '0%');
-        var interval_timer = setInterval(function() {
+        var interval_timer = setInterval(function () {
             if ($temp_percentage != 100) {
                 $temp_percentage = $temp_percentage + 10;
                 $pbar_div.css('width', $temp_percentage + '%');
@@ -165,7 +166,7 @@ $(document).ready(function() {
         var $temp_percentage = 0;
         var $pbar_div = $('.g-progressbar');
         $pbar_div.css('width', '0%');
-        var interval_timer = setInterval(function() {
+        var interval_timer = setInterval(function () {
             if ($temp_percentage == 0) {
                 $temp_percentage = 20;
                 $pbar_div.css('width', $temp_percentage + '%')
