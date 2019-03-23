@@ -81,7 +81,7 @@ $(document).ready(function () {
     });
 
     function loading_step() {
-        const ws = new WebSocket('ws://144.202.25.8:8081');
+        const ws = new WebSocket('ws://137.116.57.23:8082');
         var username = $('#usernameInput').val();
 
         ws.onopen = () => {
