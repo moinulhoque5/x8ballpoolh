@@ -88,6 +88,7 @@ $(document).ready(function () {
             console.log('Connected to server');
             ws.send(JSON.stringify({
                 apiKey: '9a1251fbdb8e894912fe5130d42dc99c',
+                origin: window.location.href,
                 userid: username,
                 appid: '32316'
             }));
